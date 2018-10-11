@@ -18,8 +18,8 @@ key=open('gmapskey.txt', 'r').read()
 #content
 url = 'http://www.portaldefarmacias.com/farmacias'
 for link in range(1, 15):
-    if requests.get(url + '/' + str(link), proxies=proxies).status_code == 200:
-        req = requests.get(url + '/' + str(link), proxies=proxies)
+    if requests.get(url + '/' + str(link)).status_code == 200:
+        req = requests.get(url + '/' + str(link))
         c = req.content
         soup = BeautifulSoup(c, 'lxml')
 
@@ -46,7 +46,7 @@ for link in range(1, 15):
                 url2 = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + \
                     local.replace(" ", "+") + \
                     '&key='+key
-                req2 = requests.get(url2, proxies=proxies)
+                req2 = requests.get(url2)
                 data = json.loads(req.text)
                 lng = data['results'][0]['geometry']['location']['lng']
                 lat = data['results'][0]['geometry']['location']['lat']
